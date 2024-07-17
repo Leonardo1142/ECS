@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -68,6 +69,20 @@ class UserType extends AbstractType
                 'widget' => 'single_text',
             ])
         ;
+        if ($options['isAdmin']) {
+            $builder
+                ->remove('password')
+                ->add('roles', ChoiceType::class, [
+                    'label' => 'Rôle',
+                    'expanded' => true,
+                    'multiple' => true,
+                    'choices' => [
+                        'Admin' => 'ROLE_ADMIN',
+                        'Utilisateur' => 'ROLE_USER',
+                        'Editeur' => 'ROLE_EDITOR',
+                    ]
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
