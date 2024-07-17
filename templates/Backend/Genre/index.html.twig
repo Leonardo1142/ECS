@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin des users
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="container mt-2">
+        <h1 class="text-center">Administration des genres</h1>
+        <a href="{{ path('admin.genres.create') }}" class="btn btn-primary">Créer un genre</a>
+        <div class="row mt-2">
+            {% for genre in genres %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <p>
+                            {{ genre.name }}
+                        </p>
+                        <p>
+                            Actif :
+                            {{ genre.enable }}
+                        </p>
+                        <div class="card-btn">
+                            <a href="{{ path('admin.genres.update', {id: genre.id})}}"
+                               class="btn btn-warning col-md-3">Modifier</a>
+                            {% include 'Backend/Genre/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
