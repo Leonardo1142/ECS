@@ -3,7 +3,7 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
-use Cassandra\Type\UserType;
+use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
