@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin des users
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="container mt-2">
+        <h1 class="text-center">Administration des users</h1>
+               <div class="row mt-2">
+            {% for user in users %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <p>
+                            {{ user.firstName }}
+                            {{ user.lastName }}
+                        </p>
+                        <p>
+                            Email:
+                            {{ user.email }}
+                        </p>
+                        <p>
+                            Roles:
+                            {{ user.roles|join(', ')|replace({'ROLE_': ''})|title }}
+                        </p>
+
+                        <div class="card-btn">
+                            <a href="{{ path('admin.users.update', {id: user.id}) }}"
+                               class="btn btn-warning col-md-3">Modifier</a>
+                            {% include 'Backend/User/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

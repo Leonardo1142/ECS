@@ -1,0 +1,42 @@
+.navbar {
+  background: $primary;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  color: getTextColor($primary);
+  z-index: 999999999;
+  
+  &-content {
+    @include flex(flex-start, center, $gap: 2em);
+
+    padding: 1em 0;
+  }
+
+  &-links {
+    @include flex(flex-start, center, $gap: 1em);
+
+    margin-bottom: 0;
+    flex: 1;
+  }
+
+  &-logo {
+    font-weight: bold;
+    font-size: $h5-font-size;
+  }
+
+  &-link {
+    a {
+      color: getTextColor($primary, true);
+
+      &.active {
+        color: getTextColor($primary);
+      }
+    }
+  }
+
+  &-btn-links {
+    @include flex(flex-end, center, $gap: 1em);
+
+    margin-bottom: 0;
+  }
+}

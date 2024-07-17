@@ -1,0 +1,56 @@
+<header class="navbar">
+    <nav class="container navbar-content">
+        <a href="" class="navbar-logo">My ECS</a>
+        <ul class="navbar-links">
+            <li class="navbar-link">
+                <a href="#"
+                   class="#">Home</a>
+            </li>
+            <li class="navbar-link">
+                <a href="#"
+                   class="#">#</a>
+            </li>
+        </ul>
+        <ul class="navbar-btn-links">
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="navbar-btn-link">
+                <li class="navbar-btn-link">
+                    <div class="dropdown">
+                        <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="triggerId"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >
+                            Admin
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <a class="dropdown-item" href="#">#</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">#</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">#</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </div>
+
+                </li>
+                </li>
+            {% endif %}
+            <li class="navbar-btn-link">
+                {% if app.user %}
+                <a href="/logout" data-turbo="false" class="btn btn-danger">Se déconnecter</a>
+                {% else %}
+
+                <a href="{{ path('app.login') }}" class="btn btn-secondary">Se connecter</a>
+            </li>
+            <li class="navbar-btn-link">
+                <a href="{{ path('app.register') }}" class="btn btn-light">S'inscrire</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</header>
