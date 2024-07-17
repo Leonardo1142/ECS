@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
     {
         $error = $authUtils->getLastAuthenticationError();
         $lastUsername = $authUtils->getLastUsername();
-        return $this->render('security/security_controller_php/index.html.twig', [
+        return $this->render('Security/login.html.twig', [
             'error' => $error,
             'last_username' => $lastUsername,
         ]);
@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
     {
         $user = new User;
 
-        $form = $this->createForm(UserType::class $user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
