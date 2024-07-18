@@ -1,5 +1,5 @@
 <form action="{{ path('admin.taxes.delete', {id: taxe.id}) }}" method="post"
-      onsubmit="return confirm('Etes-vous sur de vouloir supprimer ce taxe ?')" class="col-md-3">
+      onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette taxe ?')" class="col-md-3">
     <input type="hidden" name="token" value="{{ csrf_token('delete' ~ taxe.id) }}">
     <button type="submit" class="btn btn-danger">Supprimer</button>
 </form>

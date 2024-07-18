@@ -3,6 +3,7 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Taxe;
+use App\Form\TaxeType;
 use App\Repository\TaxeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,8 +47,27 @@ class TaxeController extends AbstractController
         return $this->render('Backend/Taxe/create.html.twig', [
             'taxe' => $taxe,
         ]);
+    }
 
+    #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
+    public function update(Request $request, Taxe $taxe): Response
+    {
+        if(!$taxe){
+            $this->addFlash('error','La taxe n\'existe pas');
+            return $this->redirectToRoute('admin.taxes.index');
+        }
+        $form = $this->createForm(TaxeType::class, $taxe);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($taxe);
+            $this->em->flush();
 
+            $this->addFlash('success','La taxe a bien été moidifiée');
+            return $this->redirectToRoute('admin.taxes.index');
+        }
+        return $this->render('Backend/Taxe/update.html.twig', [
+            'taxe' => $taxe,
+        ]);
     }
 }
