@@ -46,7 +46,7 @@ class TaxeController extends AbstractController
         }
 
         return $this->render('Backend/Taxe/create.html.twig', [
-            'taxe' => $taxe,
+            'form' => $form,
         ]);
     }
 
@@ -68,7 +68,7 @@ class TaxeController extends AbstractController
             return $this->redirectToRoute('admin.taxes.index');
         }
         return $this->render('Backend/Taxe/update.html.twig', [
-            'taxe' => $taxe,
+            'form' => $form,
         ]);
     }
     #[Route('/{id}/delete', name: '.delete', methods: ['POST'])]

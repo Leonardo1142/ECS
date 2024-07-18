@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Taxe;
-use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,12 +19,13 @@ class TaxeType extends AbstractType
                 'label' => 'Nom',
                 'required' => true,
             ])
-            ->add('rate',FloatType::class,[
+            ->add('rate',NumberType::class,[
                 'label' => 'Rate',
                 'required' => true,
             ])
             ->add('enable',checkboxType::class,[
                 'label' => 'Activer',
+                'required' => false,
             ])
         ;
     }
