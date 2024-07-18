@@ -38,9 +38,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $birthDate = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $defaultAddressId = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -130,15 +127,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDefaultAddressId(): ?int
-    {
-        return $this->defaultAddressId;
-    }
-
-    public function setDefaultAddressId(?int $defaultAddressId): static
-    {
-        $this->defaultAddressId = $defaultAddressId;
-
-        return $this;
-    }
 }
