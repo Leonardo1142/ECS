@@ -51,7 +51,7 @@ class GenreController extends AbstractController
     }
 
     #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
-    public function update(?Genre $genre,Request $request ): Response
+    public function update(?Genre $genre,Request $request ): Response|RedirectResponse
     {
         if (!$genre){
             $this->addFlash('error', 'Le genre n\'existe pas.');
@@ -72,7 +72,7 @@ class GenreController extends AbstractController
         ]);
     }
     #[Route('/{id}/delete', name: '.delete', methods: ['POST'])]
-    public function delete(Request $request, ?Genre $genre): RedirectResponse
+    public function delete(Request $request, ?Genre $genre): Response
     {
         if (!$genre){
             $this->addFlash('error', 'Le genre n\'existe pas.');

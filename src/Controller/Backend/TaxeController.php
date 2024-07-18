@@ -51,7 +51,7 @@ class TaxeController extends AbstractController
     }
 
     #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
-    public function update(Request $request, Taxe $taxe): Response
+    public function update(Request $request, Taxe $taxe): Response|RedirectResponse
     {
         if(!$taxe){
             $this->addFlash('error','La taxe n\'existe pas');
@@ -72,7 +72,7 @@ class TaxeController extends AbstractController
         ]);
     }
     #[Route('/{id}/delete', name: '.delete', methods: ['POST'])]
-    public function delete(Request $request, Taxe $taxe): RedirectResponse
+    public function delete(Request $request, Taxe $taxe): Response
     {
         if(!$taxe){
             $this->addFlash('error','La taxe n\'existe pas');

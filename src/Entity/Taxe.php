@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_TAXE', fields: ['name'])]
-#[UniqueEntity(fields: ['name'], message: "Le genre est déjà utilisé, veuillez en choisir un autre !")]
+#[UniqueEntity(fields: ['name'], message: "La taxe est déjà utilisé, veuillez en choisir une autre !")]
 #[ORM\Entity(repositoryClass: TaxeRepository::class)]
 class Taxe
 {

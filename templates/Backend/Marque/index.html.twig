@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin des marques
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="container mt-2">
+        <h1 class="text-center">Administration des marques</h1>
+        <a href="{{ path('admin.marques.create') }}" class="btn btn-primary">Créer une marque</a>
+        <div class="row mt-2">
+            {% for marque in marques %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <p>
+                            Nom :
+                            {{ marque.name }}
+                        </p>
+                        <p>
+                            Slug :
+                            {{ marque.slug }}
+                        </p>
+                        <p>
+                            Description :
+                            {{ marque.description }}
+                        </p>
+                        <p>
+                            Nom de l'image :
+                            {{ marque.imageName }}
+                        </p>
+                        <p>
+                            Actif :
+                            {{ marque.enable }}
+                        </p>
+                        <div class="card-btn">
+                            <a href="{{ path('admin.marques.update', {id: marque.id})}}"
+                               class="btn btn-warning col-md-3">Modifier</a>
+                            {% include 'Backend/marque/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
