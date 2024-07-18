@@ -63,7 +63,7 @@ class GenreController extends AbstractController
             $this->em->persist($genre);
             $this->em->flush();
 
-            $this->addFlash('success', 'Le genre a bien été crée');
+            $this->addFlash('success', 'Le genre a bien été moidifié');
 
             return $this->redirectToRoute('admin.genres.index');
         }

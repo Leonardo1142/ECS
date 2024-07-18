@@ -1,29 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Admin des genres
+    Admin des taxes
     {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <section class="container mt-2">
-        <h1 class="text-center">Administration des genres</h1>
-        <a href="{{ path('admin.genres.create') }}" class="btn btn-primary">Créer un genre</a>
+        <h1 class="text-center">Administration des taxes</h1>
+        <a href="{{ path('admin.taxes.create') }}" class="btn btn-primary">Créer une taxe</a>
         <div class="row mt-2">
-            {% for genre in genres %}
+            {% for taxe in taxes %}
                 <div class="col-md-4">
                     <div class="card">
                         <p>
-                            {{ genre.name }}
+                            Nom :
+                            {{ taxe.name }}
+                        </p>
+                        <p>
+                            Pourcentage :
+                            {{ taxe.rate }}
                         </p>
                         <p>
                             Actif :
-                            {{ genre.enable }}
+                            {{ taxe.enable }}
                         </p>
                         <div class="card-btn">
-                            <a href="{{ path('admin.genres.update', {id: genre.id})}}"
+                            <a href="{{ path('admin.taxes.update', {id: taxe.id})}}"
                                class="btn btn-warning col-md-3">Modifier</a>
-                            {% include 'Backend/Genre/_form.html.twig' %}
+                            {% include 'Backend/Taxe/_form.html.twig' %}
                         </div>
                     </div>
                 </div>
