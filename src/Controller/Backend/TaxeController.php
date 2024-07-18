@@ -7,6 +7,7 @@ use App\Form\TaxeType;
 use App\Repository\TaxeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -70,4 +71,22 @@ class TaxeController extends AbstractController
             'taxe' => $taxe,
         ]);
     }
+    #[Route('/{id}/delete', name: '.delete', methods: ['POST'])]
+    public function delete(Request $request, Taxe $taxe): RedirectResponse
+    {
+        if(!$taxe){
+            $this->addFlash('error','La taxe n\'existe pas');
+            return $this->redirectToRoute('admin.taxes.index');
+        }
+        if($this->isCsrfTokenValid('delete'.$taxe->getId(), $request->request->get('token'))){
+            $this->em->remove($taxe);
+            $this->em->flush();
+            $this->addFlash('success','La taxe a bien été supprimée');
+            return $this->redirectToRoute('admin.taxes.index');
+        } else{
+            $this->addFlash('error','Le jeton CSRF n\'est pas valide');
+        }
+        return $this->redirectToRoute('admin.taxes.index');
+    }
+
 }
