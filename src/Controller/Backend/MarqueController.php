@@ -3,6 +3,7 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Marque;
+use App\Form\MarqueType;
 use App\Repository\MarqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,31 +33,31 @@ class MarqueController extends AbstractController
     #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
-        if(!$marque){
-            $this->addFlash('success','La marque n\'existe pas');
-            return $this->redirectToRoute('admin.marques.index');
-        }
+        $marque = new Marque();
 
-        $form->create(FormType::class, $marque);
+        $form = $this->createForm(marqueType::class, $marque);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($marque);
             $this->em->flush();
-
-            $this->addFlash('success','La marque a bien été créee');
+            $this->addFlash('success', 'Le marque a bien été créé.');
 
             return $this->redirectToRoute('admin.marques.index');
         }
-        return $this->render('Backend/Marque/create.html.twig', [
+        return $this->render('Backend/marque/create.html.twig', [
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
-    public function update(Request $request, Marque $marque): Response
+    public function update(Request $request, Marque $marque): Response|RedirectResponse
     {
-        $form = $this->createForm(FormType::class, $marque);
+        if(!$marque){
+        $this->addFlash('success','La marque n\'existe pas');
+        return $this->redirectToRoute('admin.marques.index');
+    }
+        $form = $this->createForm(MarqueType::class, $marque);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($marque);
@@ -71,7 +72,7 @@ class MarqueController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: '.delete', methods: ['POST'])]
-    public function delete(Request $request, ?Marque $marque): RedirectResponse
+    public function delete(Request $request, ?Marque $marque): Response
     {
         if (!$marque){
             $this->addFlash('error','La marque n\'existe pas');

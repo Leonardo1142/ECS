@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTimeTrait;
 use App\Repository\MarqueRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,8 +11,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: MarqueRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_MARQUE', fields: ['name'])]
 #[UniqueEntity(fields: ['name'], message: "La Marque est déjà utilisé, veuillez en choisir une autre !")]
+#[ORM\HasLifecycleCallbacks]
 class Marque
 {
+    use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -99,30 +102,6 @@ class Marque
     public function setEnable(bool $enable): static
     {
         $this->enable = $enable;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
