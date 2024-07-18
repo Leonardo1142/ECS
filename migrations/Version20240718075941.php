@@ -20,12 +20,12 @@ final class Version20240718075941 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE taxe (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) DEFAULT NULL, rate DOUBLE PRECISION NOT NULL, enable TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_TAXE (name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE Taxe (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) DEFAULT NULL, rate DOUBLE PRECISION NOT NULL, enable TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_TAXE (name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE taxe');
+        $this->addSql('DROP TABLE Taxe');
     }
 }
