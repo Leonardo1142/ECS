@@ -50,7 +50,7 @@ class GenreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/update', name: '.update', methods: ['POST'])]
+    #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
     public function update(?Genre $genre,Request $request ): Response
     {
         if (!$genre){
