@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: MarqueRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_MARQUE', fields: ['name'])]
-#[UniqueEntity(fields: ['name'], message: "La marque est déjà utilisé, veuillez en choisir une autre !")]
+#[UniqueEntity(fields: ['name'], message: "La Marque est déjà utilisé, veuillez en choisir une autre !")]
 class Marque
 {
     #[ORM\Id]
