@@ -54,7 +54,7 @@ class MarqueController extends AbstractController
     public function update(Request $request, Marque $marque): Response|RedirectResponse
     {
         if(!$marque){
-        $this->addFlash('success','La marque n\'existe pas');
+        $this->addFlash('error','La marque n\'existe pas');
         return $this->redirectToRoute('admin.marques.index');
     }
         $form = $this->createForm(MarqueType::class, $marque);
