@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_MARQUE', fields: ['name'])]
-#[UniqueEntity(fields: ['name'], message: "La Marque est déjà utilisé, veuillez en choisir une autre !")]
+#[UniqueEntity(fields: ['name'], message: "Le model est déjà utilisé, veuillez en choisir une autre !")]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ModelRepository::class)]
 class Model

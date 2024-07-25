@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin des models
+{% endblock %}
+
+{% block body %}
+    <section class="container mt-2">
+        <h1 class="text-center">Administration des models</h1>
+        <a href="{{ path('admin.models.create') }}" class="btn btn-primary">Créer un model</a>
+        <div class="row mt-2">
+          {% for model in models %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <p>
+                            Nom :
+                            {{ model.name }}
+                        </p>
+                        <p>
+                            Slug :
+                            {{ model.slug }}
+                        </p>
+                        <p>
+                            Actif :
+                            {{ model.enable }}
+                        </p>
+                        <div class="card-btn">
+                            <a href="{{ path('admin.models.update', {id: model.id})}}"
+                               class="btn btn-warning col-md-3">Modifier</a>
+                            {% include 'Backend/Model/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
